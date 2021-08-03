@@ -15,10 +15,10 @@ Adapt as necessary for your environment.
 
 Note: This implementation was setup to use:
 
-- IntelliJ 2021.1
+- IntelliJ 2021.2
 - Kotlin 1.5.21
-- Java SDK 15 
-- Gradle 7.1
+- Java SDK 16.0.2 
+- Gradle 7.1.1
 - JUnit 5-style for testing.
 
 Open the reference code:

@@ -6,10 +6,13 @@
  
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    kotlin("jvm") version "1.5.21"
+    kotlin("jvm")
 
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
+
+    // Collect metrics on the exercises
+    id("io.gitlab.arturbosch.detekt").version("1.17.1")
 }
 
 repositories {
@@ -23,4 +26,10 @@ dependencies {
 
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+}
+
+detekt {
+    toolVersion = "1.17.1"
+    config = files("config/detekt/detekt.yml")
+    buildUponDefaultConfig = true
 }

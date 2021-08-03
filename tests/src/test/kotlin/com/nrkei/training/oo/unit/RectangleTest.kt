@@ -4,9 +4,9 @@
  * @author Fred George  fredgeorge@acm.org
  */
 
-package com.nrkei.oo_boot_camp.unit
+package com.nrkei.training.oo.unit
 
-import com.nrkei.oo_boot_camp.rectangle.Rectangle
+import com.nrkei.training.oo.rectangle.Rectangle
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

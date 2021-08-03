@@ -4,7 +4,7 @@
  * @author Fred George  fredgeorge@acm.org
  */
 
-package com.nrkei.oo_boot_camp.rectangle
+package com.nrkei.training.oo.rectangle
 
 // Understands a four-sided polygon with sides at right angles
 class Rectangle {
