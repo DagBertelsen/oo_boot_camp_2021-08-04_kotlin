@@ -7,6 +7,19 @@
 package com.nrkei.training.oo.rectangle
 
 // Understands a four-sided polygon with sides at right angles
-class Rectangle {
+class Rectangle(width: Number, height: Number) {
+    private val width = width.toDouble()
+    private val height = height.toDouble()
+
+    init {
+        require(width.toDouble() > 0 && height.toDouble() > 0 )
+        { "Dimensions must be greater than zero" }
+//        if(width.toDouble() <= 0.0 || height.toDouble() <= 0) throw IllegalArgumentException()
+    }
+
+    fun area() = width * height
+    val area get() = area()
+
+    fun perimeter() = 2 * (width + height)
 
 }
