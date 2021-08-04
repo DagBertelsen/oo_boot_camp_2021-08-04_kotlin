@@ -8,4 +8,6 @@ class Chance(likelihoodAsFraction: Number) {
 
     private fun equals(other: Chance) = this.fraction == other.fraction
 
+    override fun hashCode() = fraction.hashCode()
+
 }
