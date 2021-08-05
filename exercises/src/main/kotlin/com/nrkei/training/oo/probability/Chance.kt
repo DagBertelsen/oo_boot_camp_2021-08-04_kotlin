@@ -18,4 +18,6 @@ class Chance(likelihoodAsFraction: Number) {
 
     operator fun not() = Chance(CERTAIN_FRACTION - fraction)
 
+    infix fun and(other: Chance) = Chance(this.fraction * other.fraction)
+
 }
