@@ -2,6 +2,7 @@ package com.nrkei.training.oo.probability
 
 import kotlin.math.absoluteValue
 
+// Understands the likelihood of something specific occurring
 class Chance(likelihoodAsFraction: Number) {
     companion object {
         private const val CERTAIN_FRACTION = 1.0
@@ -9,6 +10,7 @@ class Chance(likelihoodAsFraction: Number) {
     }
     private val fraction = likelihoodAsFraction.toDouble()
 
+    @Suppress("ComplexMethod")
     override fun equals(other: Any?) =
         this === other || other is Chance && this.equals(other)
 
