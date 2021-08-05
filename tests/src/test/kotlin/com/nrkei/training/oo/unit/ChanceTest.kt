@@ -29,4 +29,22 @@ internal class ChanceTest {
         assertEquals(1, hashSetOf(LIKELY, Chance(0.75)).size)
     }
 
+    @Test
+    fun `Chance in sets`() {
+        assertTrue(Chance(0.75) in hashSetOf(LIKELY))
+        assertEquals(1, hashSetOf(LIKELY, Chance(0.75)).size)
+    }
+
+    @Test fun hash() {
+        assertEquals(LIKELY.hashCode(), Chance(0.75).hashCode())
+    }
+
+    @Test fun not() {
+        assertEquals(UNLIKELY, LIKELY.not())
+        assertEquals(LIKELY, LIKELY.not().not())
+        assertEquals(LIKELY, !!LIKELY)
+        assertEquals(IMPOSSIBLE, CERTAIN.not())
+        assertEquals(EQUALLY_LIKELY, EQUALLY_LIKELY.not())
+    }
+
 }
