@@ -17,6 +17,7 @@ import com.nrkei.training.oo.quantity.Unit.Companion.teaspoons
 import com.nrkei.training.oo.quantity.Unit.Companion.yards
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class QuantityTest {
 
@@ -53,5 +54,14 @@ internal class QuantityTest {
         assertEquals((-6).tablespoons, -6.tablespoons)
         assertEquals((-0.5).pints, 10.tablespoons - 13.ounces)
         assertEquals(-4.feet, 24.inches - 2.yards)
+    }
+
+    @Test fun `cross metric types`() {
+        assertNotEquals(1.inches, 1.teaspoons)
+        assertNotEquals(4.ounces, 2.feet)
+    }
+
+    @Test fun `incompatible units`() {
+        assertThrows<IllegalArgumentException> { 3.yards - 4.tablespoons}
     }
 }
