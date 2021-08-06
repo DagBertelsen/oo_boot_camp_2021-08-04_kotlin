@@ -9,12 +9,15 @@ import com.nrkei.training.oo.quantity.Unit.Companion.fathoms
 import com.nrkei.training.oo.quantity.Unit.Companion.feet
 import com.nrkei.training.oo.quantity.Unit.Companion.furlongs
 import com.nrkei.training.oo.quantity.Unit.Companion.gallons
+import com.nrkei.training.oo.quantity.Unit.Companion.gasMark
 import com.nrkei.training.oo.quantity.Unit.Companion.inches
+import com.nrkei.training.oo.quantity.Unit.Companion.kelvin
 import com.nrkei.training.oo.quantity.Unit.Companion.leagues
 import com.nrkei.training.oo.quantity.Unit.Companion.miles
 import com.nrkei.training.oo.quantity.Unit.Companion.ounces
 import com.nrkei.training.oo.quantity.Unit.Companion.pints
 import com.nrkei.training.oo.quantity.Unit.Companion.quarts
+import com.nrkei.training.oo.quantity.Unit.Companion.rankine
 import com.nrkei.training.oo.quantity.Unit.Companion.tablespoons
 import com.nrkei.training.oo.quantity.Unit.Companion.teaspoons
 import com.nrkei.training.oo.quantity.Unit.Companion.yards
@@ -51,6 +54,7 @@ internal class QuantityTest {
         assertEquals(8.tablespoons.hashCode(), 0.5.cups.hashCode())
         assertEquals(18.inches.hashCode(), 0.5.yards.hashCode())
         assertEquals(10.celsius.hashCode(), 50.fahrenheit.hashCode())
+        assertEquals(325.fahrenheit.hashCode(), 3.gasMark.hashCode())
     }
 
     @Test fun arithmetic() {
@@ -74,6 +78,10 @@ internal class QuantityTest {
         assertBidirectionalEquality(10.celsius, 50.fahrenheit)
         assertBidirectionalEquality(100.celsius, 212.fahrenheit)
         assertBidirectionalEquality((-40).celsius, (-40).fahrenheit)
+        assertBidirectionalEquality(325.fahrenheit, 3.gasMark)
+        assertBidirectionalEquality(0.celsius, 273.15.kelvin)
+        assertBidirectionalEquality(50.fahrenheit, 283.15.kelvin)
+        assertBidirectionalEquality(50.fahrenheit, 509.67.rankine)
     }
 
     private fun assertBidirectionalEquality(left: Quantity, right: Quantity) {

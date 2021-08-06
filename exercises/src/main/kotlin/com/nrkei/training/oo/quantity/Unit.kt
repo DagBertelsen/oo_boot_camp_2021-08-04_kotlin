@@ -3,6 +3,7 @@ package com.nrkei.training.oo.quantity
 // Understands a specific metric
 class Unit {
     companion object {
+        internal const val EPSILON = 1e-10
 
         private val TEASPOON = Unit()
         private val TABLESPOON = Unit(3, TEASPOON)
@@ -40,9 +41,15 @@ class Unit {
 
         private val CELSIUS = Unit()
         private val FAHRENHEIT = Unit(5/9.0, 32, CELSIUS)
+        private val GASMARK = Unit(125/9.0, -218.0/25, CELSIUS)
+        private val KELVIN = Unit(1, 273.15, CELSIUS)
+        private val RANKINE = Unit(5/9.0, 491.67, CELSIUS)
 
         val Number.celsius get() = Quantity(this, CELSIUS)
         val Number.fahrenheit get() = Quantity(this, FAHRENHEIT)
+        val Number.gasMark get() = Quantity(this, GASMARK)
+        val Number.kelvin get() = Quantity(this, KELVIN)
+        val Number.rankine get() = Quantity(this, RANKINE)
     }
 
     private val baseUnit: Unit
@@ -68,7 +75,7 @@ class Unit {
             require(this.isCompatible(other)) { "Cannot perform arithmetic on incompatible units" }
         }
 
-    internal fun hashCode(amount: Double) = ((amount - offset) * baseUnitRatio).hashCode()
+    internal fun hashCode(amount: Double) = ((amount - offset) * baseUnitRatio / EPSILON).toLong().hashCode()
 
     internal fun isCompatible(other: Unit) = this.baseUnit == other.baseUnit
 }
