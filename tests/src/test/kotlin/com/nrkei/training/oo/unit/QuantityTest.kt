@@ -1,7 +1,8 @@
+@file:Suppress("WrapUnaryOperator")
+
 package com.nrkei.training.oo.unit
 
 import com.nrkei.training.oo.quantity.IntervalQuantity
-import com.nrkei.training.oo.quantity.RatioQuantity
 import com.nrkei.training.oo.quantity.Unit.Companion.celsius
 import com.nrkei.training.oo.quantity.Unit.Companion.chains
 import com.nrkei.training.oo.quantity.Unit.Companion.cups

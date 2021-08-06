@@ -41,13 +41,13 @@ class Unit {
 
         private val CELSIUS = Unit()
         private val FAHRENHEIT = Unit(5/9.0, 32, CELSIUS)
-        private val GASMARK = Unit(125/9.0, -218.0/25, CELSIUS)
+        private val GAS_MARK = Unit(125/9.0, -218.0/25, CELSIUS)
         private val KELVIN = Unit(1, 273.15, CELSIUS)
         private val RANKINE = Unit(5/9.0, 491.67, CELSIUS)
 
         val Number.celsius get() = IntervalQuantity(this, CELSIUS)
         val Number.fahrenheit get() = IntervalQuantity(this, FAHRENHEIT)
-        val Number.gasMark get() = IntervalQuantity(this, GASMARK)
+        val Number.gasMark get() = IntervalQuantity(this, GAS_MARK)
         val Number.kelvin get() = IntervalQuantity(this, KELVIN)
         val Number.rankine get() = IntervalQuantity(this, RANKINE)
     }

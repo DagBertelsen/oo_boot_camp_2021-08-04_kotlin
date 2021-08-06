@@ -1,7 +1,5 @@
 package com.nrkei.training.oo.quantity
 
-import kotlin.math.absoluteValue
-
 // Understands a specific measurement
 class RatioQuantity internal constructor(amount: Number, unit: Unit) : IntervalQuantity(amount, unit) {
 
