@@ -4,5 +4,5 @@
  * @author Fred George  fredgeorge@acm.org
  */
  
-rootProject.name = "com.nrkei.oo_boot_camp"
+rootProject.name = "oo_boot_camp_2021-08-04_kotlin"
 include("exercises", "tests")

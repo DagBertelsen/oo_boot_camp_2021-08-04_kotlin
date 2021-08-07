@@ -6,6 +6,7 @@ import kotlin.math.absoluteValue
 open class IntervalQuantity internal constructor(amount: Number, protected val unit: Unit) {
     protected val amount = amount.toDouble()
 
+    @Suppress("ComplexMethod")
     override fun equals(other: Any?) = this === other || other is IntervalQuantity && this.equals(other)
 
     private fun equals(other: IntervalQuantity) = this.isCompatible(other) &&
