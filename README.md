@@ -1,4 +1,4 @@
-# oo_boot_camp_2021-05-03_kotlin
+# oo_boot_camp_2021-08-04_kotlin
 
 Copyright (c) 2021 by Fred George  
 May be used freely except for training; license required for training.
