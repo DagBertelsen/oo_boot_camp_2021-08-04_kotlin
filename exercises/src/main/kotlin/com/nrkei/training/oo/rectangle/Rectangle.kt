@@ -6,13 +6,15 @@
 
 package com.nrkei.training.oo.rectangle
 
+import com.nrkei.training.oo.orderable.Orderable
+
 // Understands a four-sided polygon with sides at right angles
-class Rectangle(width: Number, height: Number) {
+class Rectangle(width: Number, height: Number) : Orderable<Rectangle> {
     private val width = width.toDouble()
     private val height = height.toDouble()
 
     init {
-        require(width.toDouble() > 0 && height.toDouble() > 0 )
+        require(width.toDouble() > 0 && height.toDouble() > 0)
         { "Dimensions must be greater than zero" }
     }
 
@@ -24,5 +26,7 @@ class Rectangle(width: Number, height: Number) {
     val area get() = area()
 
     fun perimeter() = 2 * (width + height)
+
+    override fun isBetterThan(other: Rectangle) = this.area() > other.area()
 
 }
