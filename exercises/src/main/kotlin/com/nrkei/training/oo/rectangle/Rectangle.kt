@@ -14,7 +14,10 @@ class Rectangle(width: Number, height: Number) {
     init {
         require(width.toDouble() > 0 && height.toDouble() > 0 )
         { "Dimensions must be greater than zero" }
-//        if(width.toDouble() <= 0.0 || height.toDouble() <= 0) throw IllegalArgumentException()
+    }
+
+    companion object {
+        fun square(side: Number) = Rectangle(side, side)
     }
 
     fun area() = width * height
