@@ -8,19 +8,10 @@ class Node {
 
     infix fun to(neighbor: Node) = neighbor.also { neighbors.add(neighbor) }
 
-    infix fun canReach(destination: Node) = canReach(destination, noVisitedNodes)
+    infix fun canReach(destination: Node) = hopCount(destination, noVisitedNodes) != UNREACHABLE
 
     infix fun hopCount(destination: Node) = hopCount(destination, noVisitedNodes).also { result ->
         require(result != UNREACHABLE) { "Destination is unreachable" }
-    }
-
-    private fun canReach(destination: Node, visitedNodes: List<Node>): Boolean {
-        if (this == destination) return true
-        if (this in visitedNodes) return false
-        neighbors.forEach { neighbor ->
-            if (neighbor.canReach(destination, visitedNodes + this)) return true
-        }
-        return false
     }
 
     private fun hopCount(destination: Node, visitedNodes: List<Node>): Int {
