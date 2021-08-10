@@ -2,6 +2,7 @@ package com.nrkei.training.oo.graph
 
 import com.nrkei.training.oo.graph.Link.Companion.FEWEST_HOPS
 import com.nrkei.training.oo.graph.Link.Companion.LEAST_COST
+import com.nrkei.training.oo.graph.Path.ActualPath
 
 class Node {
     companion object {
@@ -10,7 +11,7 @@ class Node {
 
     private val links = mutableListOf<Link>()
 
-    infix fun canReach(destination: Node) = path(destination, noVisitedNodes) != null
+    infix fun canReach(destination: Node) = path(destination, noVisitedNodes) is ActualPath
 
     infix fun hopCount(destination: Node) = cost(destination,FEWEST_HOPS).toInt()
 
@@ -27,15 +28,17 @@ class Node {
         return links.minOf { link -> link.cost(destination, visitedNodes + this, strategy) }
     }
 
-    infix fun path(destination: Node) =
-        path(destination, noVisitedNodes) ?: throw IllegalArgumentException("Destination is unreachable")
+    infix fun path(destination: Node) = path(destination, noVisitedNodes).also { result ->
+        require(result is ActualPath) { "Destination is unreachable" }
+    }
 
-    internal fun path(destination: Node, visitedNodes: List<Node>): Path? {
-        if (this == destination) return Path()
-        if (this in visitedNodes) return null
+    internal fun path(destination: Node, visitedNodes: List<Node>): Path {
+        if (this == destination) return ActualPath()
+        if (this in visitedNodes) return Path.None
         return links
             .map { link -> link.path(destination, visitedNodes + this) }
-            .minByOrNull { it?.cost() ?: Double.POSITIVE_INFINITY }
+            .minByOrNull { it.cost() }
+            ?: Path.None
     }
 
     private val noVisitedNodes = emptyList<Node>()
