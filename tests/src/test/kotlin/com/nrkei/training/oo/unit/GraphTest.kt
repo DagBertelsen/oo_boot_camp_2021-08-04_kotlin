@@ -57,4 +57,5 @@ internal class GraphTest {
         assertThrows<IllegalArgumentException> { A cost B }
         assertThrows<IllegalArgumentException> { B cost G }
     }
+
 }

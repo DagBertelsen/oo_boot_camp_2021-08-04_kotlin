@@ -7,22 +7,24 @@ class Node {
     companion object {
         private const val UNREACHABLE = Double.POSITIVE_INFINITY
     }
+
     private val links = mutableListOf<Link>()
 
     infix fun canReach(destination: Node) = cost(destination, noVisitedNodes, LEAST_COST) != UNREACHABLE
 
-    infix fun hopCount(destination: Node) = cost(destination, noVisitedNodes, FEWEST_HOPS).also { result ->
-        require(result != UNREACHABLE) { "Destination is unreachable" }
-    }.toInt()
+    infix fun hopCount(destination: Node) = cost(destination,FEWEST_HOPS).toInt()
 
-    infix fun cost(destination: Node) = cost(destination, noVisitedNodes, LEAST_COST).also { result ->
-        require(result != UNREACHABLE) { "Destination is unreachable" }
-    }
+    infix fun cost(destination: Node) = cost(destination,LEAST_COST)
+
+    private fun cost(destination: Node, strategy: CostStrategy) =
+        cost(destination, noVisitedNodes, strategy).also { result ->
+            require(result != UNREACHABLE) { "Destination is unreachable" }
+        }
 
     internal fun cost(destination: Node, visitedNodes: List<Node>, strategy: CostStrategy): Double {
         if (this == destination) return 0.0
         if (this in visitedNodes || links.isEmpty()) return UNREACHABLE
-        return links.minOf { link -> link.cost(destination, visitedNodes + this, strategy)}
+        return links.minOf { link -> link.cost(destination, visitedNodes + this, strategy) }
     }
 
     private val noVisitedNodes = emptyList<Node>()
