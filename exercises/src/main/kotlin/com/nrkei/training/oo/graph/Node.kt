@@ -2,7 +2,7 @@ package com.nrkei.training.oo.graph
 
 class Node {
     companion object {
-        private const val UNREACHABLE = -1
+        private const val UNREACHABLE = Double.POSITIVE_INFINITY
     }
     private val neighbors = mutableListOf<Node>()
 
@@ -12,10 +12,10 @@ class Node {
 
     infix fun hopCount(destination: Node) = hopCount(destination, noVisitedNodes).also { result ->
         require(result != UNREACHABLE) { "Destination is unreachable" }
-    }
+    }.toInt()
 
-    private fun hopCount(destination: Node, visitedNodes: List<Node>): Int {
-        if (this == destination) return 0
+    private fun hopCount(destination: Node, visitedNodes: List<Node>): Double {
+        if (this == destination) return 0.0
         if (this in visitedNodes) return UNREACHABLE
         var champion = UNREACHABLE
         neighbors.forEach { neighbor ->
