@@ -16,14 +16,8 @@ class Node {
 
     private fun hopCount(destination: Node, visitedNodes: List<Node>): Double {
         if (this == destination) return 0.0
-        if (this in visitedNodes) return UNREACHABLE
-        var champion = UNREACHABLE
-        neighbors.forEach { neighbor ->
-            (neighbor.hopCount(destination, visitedNodes + this) + 1).also { challenger ->
-                if(challenger < champion) champion = challenger
-            }
-        }
-        return champion
+        if (this in visitedNodes || neighbors.isEmpty()) return UNREACHABLE
+        return neighbors.minOf { neighbor -> neighbor.hopCount(destination, visitedNodes + this) + 1}
     }
 
     private val noVisitedNodes = emptyList<Node>()
