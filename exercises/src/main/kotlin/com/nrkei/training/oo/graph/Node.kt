@@ -13,6 +13,15 @@ class Node {
 
     infix fun path(destination: Node) = path(destination, Path::cost)
 
+    infix fun paths(destination: Node) = paths(destination, noVisitedNodes)
+
+    @Suppress("ComplexMethod")
+    internal fun paths(destination: Node, visitedNodes: List<Node>): List<Path> {
+        if (this == destination) return listOf(ActualPath())
+        if (this in visitedNodes) return emptyList()
+        return links.flatMap { link -> link.paths(destination, visitedNodes + this) }
+    }
+
     private fun path(destination: Node, strategy: PathStrategy) =
         path(destination, noVisitedNodes, strategy)
             .also { result -> require(result is ActualPath) { "Destination is unreachable" } }

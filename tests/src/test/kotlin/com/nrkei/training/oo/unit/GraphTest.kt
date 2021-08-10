@@ -69,6 +69,17 @@ internal class GraphTest {
         assertThrows<IllegalArgumentException> { B path G }
     }
 
+    @Test fun `all paths between two Nodes`() {
+        assertEquals(1, (A paths A).count())
+        assertEquals(1, (B paths A).count())
+        assertEquals(1, (B paths F).count())
+        assertEquals(2, (B paths D).count())
+        assertEquals(3, (C paths F).count())
+        assertEquals(0, (G paths B).count())
+        assertEquals(0, (B paths G).count())
+        assertEquals(0, (A paths B).count())
+    }
+
     private fun assertPath(source: Node, destination: Node, expectedHopCount: Int, expectedCost: Number) {
         (source path destination).also { path ->
             assertEquals(expectedHopCount, path.hopCount())
