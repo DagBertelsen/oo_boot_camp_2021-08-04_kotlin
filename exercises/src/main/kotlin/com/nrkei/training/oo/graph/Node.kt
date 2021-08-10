@@ -27,6 +27,17 @@ class Node {
         return links.minOf { link -> link.cost(destination, visitedNodes + this, strategy) }
     }
 
+    infix fun path(destination: Node) =
+        path(destination, noVisitedNodes) ?: throw IllegalArgumentException("Destination is unreachable")
+
+    internal fun path(destination: Node, visitedNodes: List<Node>): Path? {
+        if (this == destination) return Path()
+        if (this in visitedNodes) return null
+        return links
+            .map { link -> link.path(destination, visitedNodes + this) }
+            .minByOrNull { it?.cost() ?: Double.POSITIVE_INFINITY }
+    }
+
     private val noVisitedNodes = emptyList<Node>()
 
     infix fun cost(amount: Number) = LinkBuilder(amount.toDouble())
