@@ -1,5 +1,6 @@
 package com.nrkei.training.oo.graph
 
+import com.nrkei.training.oo.graph.Link.Companion.FEWEST_HOPS
 import com.nrkei.training.oo.graph.Link.Companion.LEAST_COST
 
 class Node {
@@ -8,17 +9,11 @@ class Node {
     }
     private val links = mutableListOf<Link>()
 
-    infix fun canReach(destination: Node) = hopCount(destination, noVisitedNodes) != UNREACHABLE
+    infix fun canReach(destination: Node) = cost(destination, noVisitedNodes, LEAST_COST) != UNREACHABLE
 
-    infix fun hopCount(destination: Node) = hopCount(destination, noVisitedNodes).also { result ->
+    infix fun hopCount(destination: Node) = cost(destination, noVisitedNodes, FEWEST_HOPS).also { result ->
         require(result != UNREACHABLE) { "Destination is unreachable" }
     }.toInt()
-
-    internal fun hopCount(destination: Node, visitedNodes: List<Node>): Double {
-        if (this == destination) return 0.0
-        if (this in visitedNodes || links.isEmpty()) return UNREACHABLE
-        return links.minOf { link -> link.hopCount(destination, visitedNodes + this)}
-    }
 
     infix fun cost(destination: Node) = cost(destination, noVisitedNodes, LEAST_COST).also { result ->
         require(result != UNREACHABLE) { "Destination is unreachable" }
