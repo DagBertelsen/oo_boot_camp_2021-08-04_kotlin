@@ -10,11 +10,11 @@ class Node {
 
     private val links = mutableListOf<Link>()
 
-    infix fun canReach(destination: Node) = cost(destination, noVisitedNodes, LEAST_COST) != UNREACHABLE
+    infix fun canReach(destination: Node) = path(destination, noVisitedNodes) != null
 
     infix fun hopCount(destination: Node) = cost(destination,FEWEST_HOPS).toInt()
 
-    infix fun cost(destination: Node) = cost(destination,LEAST_COST)
+    infix fun cost(destination: Node) = path(destination).cost()
 
     private fun cost(destination: Node, strategy: CostStrategy) =
         cost(destination, noVisitedNodes, strategy).also { result ->
