@@ -1,5 +1,7 @@
 package com.nrkei.training.oo.graph
 
+import com.nrkei.training.oo.graph.Path.Companion.filterBy
+
 class Node {
     private val links = mutableListOf<Link>()
 
@@ -11,20 +13,13 @@ class Node {
 
     infix fun path(destination: Node) = path(destination, Path::cost)
 
-    infix fun paths(destination: Node) = paths(destination, noVisitedNodes)
+    infix fun paths(destination: Node) = paths().filterBy(destination)
 
     fun paths() = paths(noVisitedNodes)
 
-    @Suppress("ComplexMethod")
-    internal fun paths(destination: Node, visitedNodes: List<Node>): List<Path> {
-        if (this == destination) return listOf(Path())
-        if (this in visitedNodes) return emptyList()
-        return links.flatMap { link -> link.paths(destination, visitedNodes + this) }
-    }
-
     internal fun paths(visitedNodes: List<Node>): List<Path> {
         if (this in visitedNodes) return emptyList()
-        return (links.flatMap { link -> link.paths(visitedNodes + this) }) + Path()
+        return (links.flatMap { link -> link.paths(visitedNodes + this) }) + Path(this)
     }
 
     private fun path(destination: Node, strategy: PathStrategy) = paths(destination)
