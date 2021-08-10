@@ -6,8 +6,6 @@ class Node {
     }
     private val links = mutableListOf<Link>()
 
-    infix fun to(neighbor: Node) = neighbor.also { links.add(Link(neighbor)) }
-
     infix fun canReach(destination: Node) = hopCount(destination, noVisitedNodes) != UNREACHABLE
 
     infix fun hopCount(destination: Node) = hopCount(destination, noVisitedNodes).also { result ->
@@ -21,4 +19,12 @@ class Node {
     }
 
     private val noVisitedNodes = emptyList<Node>()
+
+    infix fun cost(amount: Number) = LinkBuilder(amount.toDouble())
+
+    inner class LinkBuilder internal constructor(private val cost: Double) {
+        infix fun to(neighbor: Node) = neighbor.also {
+            links.add(Link(neighbor, cost))
+        }
+    }
 }

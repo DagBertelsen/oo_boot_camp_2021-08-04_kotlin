@@ -17,10 +17,10 @@ internal class GraphTest {
         private val G = Node()
 
         init {
-            B to A
-            B to C to D to E to B to F
-            C to D
-            C to E
+            B cost 5 to A
+            B cost 6 to C cost 7 to D cost 2 to E cost 3 to B cost 4 to F
+            C cost 1 to D
+            C cost 8 to E
         }
     }
 
