@@ -19,8 +19,8 @@ class Node {
         if (this in visitedNodes) return UNREACHABLE
         var champion = UNREACHABLE
         neighbors.forEach { neighbor ->
-            neighbor.hopCount(destination, visitedNodes + this).also { challenger ->
-                if(challenger != UNREACHABLE && (champion == UNREACHABLE || challenger + 1 < champion)) champion = challenger + 1
+            (neighbor.hopCount(destination, visitedNodes + this) + 1).also { challenger ->
+                if(challenger < champion) champion = challenger
             }
         }
         return champion
