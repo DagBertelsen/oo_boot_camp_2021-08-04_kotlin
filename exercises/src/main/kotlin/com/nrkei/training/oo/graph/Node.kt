@@ -28,12 +28,13 @@ class Node {
         if (this == destination) return 0
         if (this in visitedNodes) return UNREACHABLE
         visitedNodes.add(this)
+        var champion = UNREACHABLE
         neighbors.forEach { neighbor ->
-            neighbor.hopCount(destination, visitedNodes).also { result ->
-                if(result != UNREACHABLE) return result + 1
+            neighbor.hopCount(destination, visitedNodes).also { challenger ->
+                if(challenger != UNREACHABLE && (champion == UNREACHABLE || challenger + 1 < champion)) champion = challenger + 1
             }
         }
-        return UNREACHABLE
+        return champion
     }
 
     private val noVisitedNodes get() = mutableListOf<Node>()
