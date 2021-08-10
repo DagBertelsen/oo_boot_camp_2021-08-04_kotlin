@@ -46,4 +46,15 @@ internal class GraphTest {
         assertThrows<IllegalArgumentException> { A hopCount B }
         assertThrows<IllegalArgumentException> { B hopCount G }
     }
+
+    @Test internal fun cost() {
+        assertEquals(0.0, B cost B)
+        assertEquals(5.0, B cost A)
+        assertEquals(4.0, B cost F)
+        assertEquals(7.0, B cost D)
+        assertEquals(10.0, C cost F)
+        assertThrows<IllegalArgumentException> { G cost B }
+        assertThrows<IllegalArgumentException> { A cost B }
+        assertThrows<IllegalArgumentException> { B cost G }
+    }
 }
