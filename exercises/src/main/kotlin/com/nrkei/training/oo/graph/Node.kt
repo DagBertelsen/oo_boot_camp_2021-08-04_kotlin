@@ -13,11 +13,18 @@ class Node {
 
     infix fun paths(destination: Node) = paths(destination, noVisitedNodes)
 
+    fun paths() = paths(noVisitedNodes)
+
     @Suppress("ComplexMethod")
     internal fun paths(destination: Node, visitedNodes: List<Node>): List<Path> {
         if (this == destination) return listOf(Path())
         if (this in visitedNodes) return emptyList()
         return links.flatMap { link -> link.paths(destination, visitedNodes + this) }
+    }
+
+    internal fun paths(visitedNodes: List<Node>): List<Path> {
+        if (this in visitedNodes) return emptyList()
+        return (links.flatMap { link -> link.paths(visitedNodes + this) }) + Path()
     }
 
     private fun path(destination: Node, strategy: PathStrategy) = paths(destination)
