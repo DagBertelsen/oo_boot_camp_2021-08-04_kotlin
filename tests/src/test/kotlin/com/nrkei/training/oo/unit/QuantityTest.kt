@@ -22,6 +22,7 @@ import com.nrkei.training.oo.quantity.Unit.Companion.quarts
 import com.nrkei.training.oo.quantity.Unit.Companion.rankine
 import com.nrkei.training.oo.quantity.Unit.Companion.tablespoons
 import com.nrkei.training.oo.quantity.Unit.Companion.teaspoons
+import com.nrkei.training.oo.quantity.Unit.Companion.universal_zero
 import com.nrkei.training.oo.quantity.Unit.Companion.yards
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -45,8 +46,7 @@ internal class QuantityTest {
         assertEquals(22.fathoms, 2.chains)
     }
 
-    @Test
-    fun `Chance in sets`() {
+    @Test fun `Chance in sets`() {
         assertTrue(8.tablespoons in hashSetOf(8.tablespoons))
         assertEquals(1, hashSetOf(8.tablespoons, 8.tablespoons).size)
     }
@@ -75,7 +75,21 @@ internal class QuantityTest {
         assertThrows<IllegalArgumentException> { 3.yards - 4.tablespoons}
     }
 
-    @Test internal fun temperatures() {
+    @Test fun `universal zero equality`() {
+        assertEquals(universal_zero, universal_zero)
+        assertEquals(0.teaspoons, universal_zero)
+        assertEquals(universal_zero, 0.inches)
+        assertEquals(universal_zero, +universal_zero)
+        assertEquals(universal_zero, -universal_zero)
+        assertNotEquals(universal_zero, 1.teaspoons)
+    }
+
+    @Test fun `universal zero arithmetic`() {
+        assertEquals(0.teaspoons, 0.teaspoons + universal_zero)
+        assertEquals(0.teaspoons, universal_zero + 0.teaspoons)
+    }
+
+    @Test fun temperatures() {
         assertBidirectionalEquality(0.celsius, 32.fahrenheit)
         assertBidirectionalEquality(10.celsius, 50.fahrenheit)
         assertBidirectionalEquality(100.celsius, 212.fahrenheit)
@@ -86,8 +100,7 @@ internal class QuantityTest {
         assertBidirectionalEquality(50.fahrenheit, 509.67.rankine)
     }
 
-    @Test
-    internal fun temperatureArithmetic() {
+    @Test fun temperatureArithmetic() {
         // The following should not compile!
 //        10.celsius - 32.fahrenheit
     }

@@ -50,6 +50,16 @@ class Unit {
         val Number.gasMark get() = IntervalQuantity(this, GAS_MARK)
         val Number.kelvin get() = IntervalQuantity(this, KELVIN)
         val Number.rankine get() = IntervalQuantity(this, RANKINE)
+
+        private val UNIT = Unit()
+        private val PERCENTAGE = Unit(1/100.0, UNIT)
+
+        val Number.units get() = RatioQuantity(this, UNIT)
+        val Number.percent get() = RatioQuantity(this, PERCENTAGE)
+
+        internal val NO_UNIT = Unit()
+
+        val universal_zero = RatioQuantity.Zero
     }
 
     private val baseUnit: Unit
@@ -77,5 +87,6 @@ class Unit {
 
     internal fun hashCode(amount: Double) = ((amount - offset) * baseUnitRatio / EPSILON).toLong().hashCode()
 
-    internal fun isCompatible(other: Unit) = this.baseUnit == other.baseUnit
+    @Suppress("ComplexMethod")
+    internal fun isCompatible(other: Unit) = this == NO_UNIT || other == NO_UNIT || this.baseUnit == other.baseUnit
 }
