@@ -51,6 +51,18 @@ class Unit {
         val Number.kelvin get() = IntervalQuantity(this, KELVIN)
         val Number.rankine get() = IntervalQuantity(this, RANKINE)
 
+        private val SECOND = Unit()
+        private val MINUTE = Unit(60, SECOND)
+        private val HOUR = Unit(60, MINUTE)
+        private val DAY = Unit(24, HOUR)
+        private val WEEK = Unit(7, DAY)
+
+        val Number.seconds get() = RatioQuantity(this, SECOND)
+        val Number.minutes get() = RatioQuantity(this, MINUTE)
+        val Number.hours get() = RatioQuantity(this, HOUR)
+        val Number.days get() = RatioQuantity(this, DAY)
+        val Number.weeks get() = RatioQuantity(this, WEEK)
+
         private val UNIT = Unit()
         private val PERCENTAGE = Unit(1/100.0, UNIT)
 

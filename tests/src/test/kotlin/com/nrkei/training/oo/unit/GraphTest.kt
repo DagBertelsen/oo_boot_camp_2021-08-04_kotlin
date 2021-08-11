@@ -2,6 +2,7 @@ package com.nrkei.training.oo.unit
 
 import com.nrkei.training.oo.graph.Node
 import com.nrkei.training.oo.quantity.Unit.Companion.hops
+import com.nrkei.training.oo.quantity.Unit.Companion.hours
 import com.nrkei.training.oo.quantity.Unit.Companion.units
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -19,10 +20,10 @@ internal class GraphTest {
         private val G = Node()
 
         init {
-            B cost 5 to A
-            B cost 6 to C cost 7 to D cost 2 to E cost 3 to B cost 4 to F
-            C cost 1 to D
-            C cost 8 to E
+            B cost 5.hours to A
+            B cost 6.hours to C cost 7.hours to D cost 2.hours to E cost 3.hours to B cost 4.hours to F
+            C cost 1.hours to D
+            C cost 8.hours to E
         }
     }
 
@@ -50,11 +51,11 @@ internal class GraphTest {
     }
 
     @Test internal fun cost() {
-        assertEquals(0.units, B cost B)
-        assertEquals(5.units, B cost A)
-        assertEquals(4.units, B cost F)
-        assertEquals(7.units, B cost D)
-        assertEquals(10.units, C cost F)
+        assertEquals(0.hours, B cost B)
+        assertEquals(5.hours, B cost A)
+        assertEquals(4.hours, B cost F)
+        assertEquals(7.hours, B cost D)
+        assertEquals(10.hours, C cost F)
         assertThrows<IllegalArgumentException> { G cost B }
         assertThrows<IllegalArgumentException> { A cost B }
         assertThrows<IllegalArgumentException> { B cost G }
@@ -95,7 +96,7 @@ internal class GraphTest {
     private fun assertPath(source: Node, destination: Node, expectedHopCount: Int, expectedCost: Number) {
         (source path destination).also { path ->
             assertEquals(expectedHopCount.hops, path.hopCount())
-            assertEquals(expectedCost.units, path.cost())
+            assertEquals(expectedCost.hours, path.cost())
         }
     }
 }

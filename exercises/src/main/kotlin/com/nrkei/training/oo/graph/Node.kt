@@ -32,6 +32,8 @@ class Node {
 
     infix fun cost(amount: Number) = LinkBuilder(amount.units)
 
+    infix fun cost(amount: RatioQuantity) = LinkBuilder(amount)
+
     inner class LinkBuilder internal constructor(private val cost: RatioQuantity) {
         infix fun to(neighbor: Node) = neighbor.also {
             links.add(Link(neighbor, cost))
