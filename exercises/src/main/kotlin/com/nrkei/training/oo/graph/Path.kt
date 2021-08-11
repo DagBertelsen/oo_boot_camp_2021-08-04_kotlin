@@ -1,6 +1,8 @@
 package com.nrkei.training.oo.graph
 
 import com.nrkei.training.oo.graph.Link.Companion.totalCost
+import com.nrkei.training.oo.quantity.RatioQuantity
+import com.nrkei.training.oo.quantity.Unit.Companion.hops
 
 // Understands a route from one Node to another Node
 class Path internal constructor(private val destination: Node) {
@@ -14,7 +16,7 @@ class Path internal constructor(private val destination: Node) {
 
     fun cost() = links.totalCost()
 
-    fun hopCount() = links.size
+    fun hopCount() = links.size.hops
 }
 
-internal typealias PathStrategy = (Path) -> Number
+internal typealias PathStrategy = (Path) -> RatioQuantity

@@ -1,6 +1,8 @@
 package com.nrkei.training.oo.graph
 
 import com.nrkei.training.oo.graph.Path.Companion.filterBy
+import com.nrkei.training.oo.quantity.RatioQuantity
+import com.nrkei.training.oo.quantity.Unit.Companion.units
 
 class Node {
     private val links = mutableListOf<Link>()
@@ -23,14 +25,14 @@ class Node {
     }
 
     private fun path(destination: Node, strategy: PathStrategy) = paths(destination)
-        .minByOrNull { strategy(it).toDouble() }
+        .minByOrNull { strategy(it) }
         ?: throw IllegalArgumentException("Destination is unreachable")
 
     private val noVisitedNodes = emptyList<Node>()
 
-    infix fun cost(amount: Number) = LinkBuilder(amount.toDouble())
+    infix fun cost(amount: Number) = LinkBuilder(amount.units)
 
-    inner class LinkBuilder internal constructor(private val cost: Double) {
+    inner class LinkBuilder internal constructor(private val cost: RatioQuantity) {
         infix fun to(neighbor: Node) = neighbor.also {
             links.add(Link(neighbor, cost))
         }

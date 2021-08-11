@@ -1,6 +1,8 @@
 package com.nrkei.training.oo.unit
 
 import com.nrkei.training.oo.graph.Node
+import com.nrkei.training.oo.quantity.Unit.Companion.hops
+import com.nrkei.training.oo.quantity.Unit.Companion.units
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -37,22 +39,22 @@ internal class GraphTest {
     }
 
     @Test internal fun `hop count`() {
-        assertEquals(0, B hopCount B)
-        assertEquals(1, B hopCount A)
-        assertEquals(1, B hopCount F)
-        assertEquals(2, B hopCount D)
-        assertEquals(3, C hopCount F)
+        assertEquals(0.hops, B hopCount B)
+        assertEquals(1.hops, B hopCount A)
+        assertEquals(1.hops, B hopCount F)
+        assertEquals(2.hops, B hopCount D)
+        assertEquals(3.hops, C hopCount F)
         assertThrows<IllegalArgumentException> { G hopCount B }
         assertThrows<IllegalArgumentException> { A hopCount B }
         assertThrows<IllegalArgumentException> { B hopCount G }
     }
 
     @Test internal fun cost() {
-        assertEquals(0.0, B cost B)
-        assertEquals(5.0, B cost A)
-        assertEquals(4.0, B cost F)
-        assertEquals(7.0, B cost D)
-        assertEquals(10.0, C cost F)
+        assertEquals(0.units, B cost B)
+        assertEquals(5.units, B cost A)
+        assertEquals(4.units, B cost F)
+        assertEquals(7.units, B cost D)
+        assertEquals(10.units, C cost F)
         assertThrows<IllegalArgumentException> { G cost B }
         assertThrows<IllegalArgumentException> { A cost B }
         assertThrows<IllegalArgumentException> { B cost G }
@@ -92,8 +94,8 @@ internal class GraphTest {
 
     private fun assertPath(source: Node, destination: Node, expectedHopCount: Int, expectedCost: Number) {
         (source path destination).also { path ->
-            assertEquals(expectedHopCount, path.hopCount())
-            assertEquals(expectedCost.toDouble(), path.cost())
+            assertEquals(expectedHopCount.hops, path.hopCount())
+            assertEquals(expectedCost.units, path.cost())
         }
     }
 }

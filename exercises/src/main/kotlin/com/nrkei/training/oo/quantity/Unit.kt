@@ -55,6 +55,7 @@ class Unit {
         private val PERCENTAGE = Unit(1/100.0, UNIT)
 
         val Number.units get() = RatioQuantity(this, UNIT)
+        val Number.hops get() = RatioQuantity(this, UNIT)
         val Number.percent get() = RatioQuantity(this, PERCENTAGE)
 
         internal val NO_UNIT = Unit()
