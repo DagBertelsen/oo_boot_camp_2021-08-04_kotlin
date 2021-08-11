@@ -18,9 +18,9 @@ class RatioQuantity internal constructor(amount: Number, unit: Unit) : IntervalQ
     object Zero: IntervalQuantity(0, NO_UNIT) {
         operator fun unaryPlus() = this
         operator fun unaryMinus() = this
-        operator fun plus(other: Zero) = this
+        operator fun plus(other: Zero) = other
         operator fun plus(other: RatioQuantity) = other
-        operator fun minus(other: Zero) = this
+        operator fun minus(other: Zero) = other
         operator fun minus(other: RatioQuantity) = -other
     }
 }
