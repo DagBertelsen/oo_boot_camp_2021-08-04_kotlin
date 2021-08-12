@@ -1,9 +1,10 @@
 package com.nrkei.training.oo.unit
 
 import com.nrkei.training.oo.graph.Node
+import com.nrkei.training.oo.quantity.Unit.Companion.days
 import com.nrkei.training.oo.quantity.Unit.Companion.hops
 import com.nrkei.training.oo.quantity.Unit.Companion.hours
-import com.nrkei.training.oo.quantity.Unit.Companion.units
+import com.nrkei.training.oo.quantity.Unit.Companion.minutes
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -22,8 +23,8 @@ internal class GraphTest {
         init {
             B cost 5.hours to A
             B cost 6.hours to C cost 7.hours to D cost 2.hours to E cost 3.hours to B cost 4.hours to F
-            C cost 1.hours to D
-            C cost 8.hours to E
+            C cost 60.minutes to D
+            C cost 0.25.days to E
         }
     }
 

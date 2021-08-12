@@ -2,7 +2,7 @@ package com.nrkei.training.oo.unit
 
 import com.nrkei.training.oo.orderable.bestOrNull
 import com.nrkei.training.oo.probability.Chance
-import com.nrkei.training.oo.quantity.RatioQuantity
+import com.nrkei.training.oo.quantity.SimpleRatioQuantity
 import com.nrkei.training.oo.quantity.Unit.Companion.celsius
 import com.nrkei.training.oo.quantity.Unit.Companion.cups
 import com.nrkei.training.oo.quantity.Unit.Companion.fahrenheit
@@ -31,7 +31,7 @@ internal class OrderableTest {
     @Test fun `largest Quantity`() {
         assertEquals(2.quarts, listOf(
             0.2.gallons, 24.ounces, 0.5.gallons, 7.cups).bestOrNull())
-        assertNull(emptyList<RatioQuantity>().bestOrNull())
+        assertNull(emptyList<SimpleRatioQuantity>().bestOrNull())
         assertEquals(100.celsius, listOf(
             212.fahrenheit, 0.celsius, 50.fahrenheit, (-40).celsius).bestOrNull())
     }

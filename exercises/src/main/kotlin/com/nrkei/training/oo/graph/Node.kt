@@ -1,7 +1,7 @@
 package com.nrkei.training.oo.graph
 
 import com.nrkei.training.oo.graph.Path.Companion.filterBy
-import com.nrkei.training.oo.quantity.RatioQuantity
+import com.nrkei.training.oo.quantity.SimpleRatioQuantity
 import com.nrkei.training.oo.quantity.Unit.Companion.units
 
 class Node {
@@ -32,9 +32,9 @@ class Node {
 
     infix fun cost(amount: Number) = LinkBuilder(amount.units)
 
-    infix fun cost(amount: RatioQuantity) = LinkBuilder(amount)
+    infix fun cost(amount: SimpleRatioQuantity) = LinkBuilder(amount)
 
-    inner class LinkBuilder internal constructor(private val cost: RatioQuantity) {
+    inner class LinkBuilder internal constructor(private val cost: SimpleRatioQuantity) {
         infix fun to(neighbor: Node) = neighbor.also {
             links.add(Link(neighbor, cost))
         }
